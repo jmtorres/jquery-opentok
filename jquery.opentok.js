@@ -375,6 +375,9 @@
     publisherContainer: function(e){
       // Added to avoid errors using cssSelector system
     },
+    streamWrapper: function(e){
+      // Added to avoid errors using cssSelector system
+    }
     close: function(e, stream){
       this.session.unsubscribe(stream.subscriber);
       this._removeStream(stream.subscriber.stream);
