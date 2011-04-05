@@ -2,7 +2,7 @@
  * OpenTok plugin for jQuery JavaScript Library
  *
  * Copyright (c) 2011, Jose M Torres
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -88,7 +88,7 @@
     streamCreated: "openTok_streamCreated",
     streamDestroyed: "openTok_streamDestroyed"
   };
-  
+
   $.openTok.logLevel = {
     none: TB.NONE,
     error: TB.ERROR,
@@ -140,7 +140,7 @@
       var self = this;
 
       this.internal = $.extend({}, this.internal);
-      
+
       this.css = {};
       this.css.cs = {}; // Holds the css selector strings
       this.css.jq = {}; // Holds jQuery selectors. ie., $(css.cs.method)
@@ -202,7 +202,7 @@
         }
         self.status.connected = false;
         self.status.publishing = false;
-        
+
         self._updateButtons();
 
         self._trigger($.openTok.event.sessionDisconnected, e);
@@ -247,7 +247,7 @@
           if(cssSel) { // Checks for empty string
             this.css.jq[fn] = $(this.css.cs[fn], context);
           } else {
-            this.css.jq[fn] = []; // To comply with the css.jq[fn].length check before its use. As of jQuery 1.4 could have used $() for an empty set. 
+            this.css.jq[fn] = []; // To comply with the css.jq[fn].length check before its use. As of jQuery 1.4 could have used $() for an empty set.
           }
 
           if(this.css.jq[fn].length) {
@@ -274,7 +274,7 @@
           if(cssSel) { // Checks for empty string
             parent.css.jq[fn] = $(parent.css.cs[fn], context);
           } else {
-            parent.css.jq[fn] = []; // To comply with the css.jq[fn].length check before its use. As of jQuery 1.4 could have used $() for an empty set. 
+            parent.css.jq[fn] = []; // To comply with the css.jq[fn].length check before its use. As of jQuery 1.4 could have used $() for an empty set.
           }
 
           if(parent.css.jq[fn].length) {
@@ -295,7 +295,7 @@
       }
 
       var streamId = this.options.idPrefix + "_opentok_stream_" + stream.streamId;
-      
+
       var streamWrapper;
       if($.isFunction(this.options.streamWrapper)){
         streamWrapper = $(this.options.streamWrapper(this.session, stream));
@@ -303,9 +303,9 @@
       else{
         streamWrapper = $(this.options.streamWrapper);
       }
-      
+
       var streamWrapperContainer = $('<div/>').attr("id", streamId).append(streamWrapper);
-      
+
       $(this.options.streamCssSelector.streamWrapper, streamWrapperContainer).append($('<div/>').attr("id", streamId + "_stream"));
 
       this.css.jq.streamContainer.append(streamWrapperContainer);
@@ -345,7 +345,7 @@
       }
       catch(err) {
         alert(err);
-      }      
+      }
     },
     disconnect: function(e){
       this.session.disconnect();
@@ -359,7 +359,7 @@
       catch(err){
         alert(err);
       }
-      
+
       this.status.publishing = true;
       this._updateButtons();
     },
@@ -377,7 +377,7 @@
     },
     streamWrapper: function(e){
       // Added to avoid errors using cssSelector system
-    }
+    },
     close: function(e, stream){
       this.session.unsubscribe(stream.subscriber);
       this._removeStream(stream.subscriber.stream);
