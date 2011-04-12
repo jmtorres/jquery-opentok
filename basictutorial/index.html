@@ -1,0 +1,46 @@
+
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>OpenTok API Sample &#151; Basic Tutorial</title>
+        <link href="style.css" type="text/css" rel="stylesheet" >
+
+        <script src="http://staging.tokbox.com/v0.91/js/TB.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="jquery.opentok.js" type="text/javascript" charset="utf-8"></script>
+        <script src="OpenTokLayoutContainer.js" type="text/javascript" charset="utf-8"></script>
+
+        <script type="text/javascript" charset="utf-8">
+            (function($){
+                $(document).ready(function(){
+                    $('#opentok_container').openTok({
+                        apiKey: 1127,
+                        sessionId: '17e55f92e7dedd0e96262432b4c6b66c0141150b',
+                        connectionToken: 'devtoken',
+                        cssSelector: {
+                            connect: '#connectLink',
+                            disconnect: '#disconnectLink',
+                            publish: '#publishLink',
+                            unpublish: '#unpublishLink',
+                            streamContainer: '.streamContainer',
+                            publisherContainer: '.publisherContainer'
+                        } ,
+                    });
+                });
+            })(jQuery);
+        </script>
+    </head>
+    <body>
+        <div id='opentok_container'>
+            <div id="opentok_console"></div>
+            <div id="links">
+                <a href="#" id="connectLink">Connect</a>
+                <a href="#" id="disconnectLink">Leave</a>
+                <a href="#" id="publishLink">Publish</a>
+                <a href="#" id="unpublishLink">Unpublish</a>
+            </div>
+            <div id="myCamera" class="publisherContainer"></div>
+            <div id="streams" class="streamContainer"></div>
+      </div>
+    </body>
+</html>
