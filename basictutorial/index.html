@@ -8,7 +8,6 @@
         <script src="http://staging.tokbox.com/v0.91/js/TB.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="jquery.opentok.js" type="text/javascript" charset="utf-8"></script>
-        <script src="OpenTokLayoutContainer.js" type="text/javascript" charset="utf-8"></script>
 
         <script type="text/javascript" charset="utf-8">
             (function($){
@@ -22,9 +21,15 @@
                             disconnect: '#disconnectLink',
                             publish: '#publishLink',
                             unpublish: '#unpublishLink',
-                            streamContainer: '.streamContainer',
+                            streamContainer: '.subscriberContainer',
                             publisherContainer: '.publisherContainer'
-                        } ,
+                        },
+                        container: {
+                            id: "streams",
+                            width: 600,
+                            height: 400
+                        },
+                        streamWrapper: '<div class="opentok-stream" style="display:hidden;visible:none"></div>'
                     });
                 });
             })(jQuery);
@@ -39,8 +44,9 @@
                 <a href="#" id="publishLink">Publish</a>
                 <a href="#" id="unpublishLink">Unpublish</a>
             </div>
-            <div id="myCamera" class="publisherContainer"></div>
-            <div id="streams" class="streamContainer"></div>
+            <div id="streams" class="subscriberContainer">
+                <div id="publisherDiv" class="publisherContainer"></div>
+            </div>
       </div>
     </body>
 </html>
