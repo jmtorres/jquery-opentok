@@ -4,8 +4,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>jQuery OpenTok plugin</title>
     <style type="text/css">
-    body { font-family:Arial, Helvetica, sans-serif; }
-    pre {font-family:"Courier New", Courier, monospace}
+    body { font-family:Arial, Helvetica, sans-serif}
+    pre {font-family:"Courier New", Courier, monospace; 
+			font-size:18px;
+			margin-left:24px;
+			padding:8px;
+			background-color:#DDD}
     code {font-family:"Courier New", Courier, monospace}
     dt {font-family:"Courier New", Courier, monospace;
         font-size:20px;
@@ -16,6 +20,8 @@
     dd {
         margin:0px;
         }
+	h2 {margin-top:48px}
+	h3 {margin-top:32px}
     </style>
 </head>
 
@@ -27,21 +33,25 @@
 		        For information on OpenTok and the OpenTok JavaScript library, see the
                 <a href="http://www.opentok.com">OpenTok</a> website.
 
-		        <h2>Quick Start Guide</h2>
+		        <h2>A simple example</h2>
+                
+                <p>This example shows how to connect to an OpenTok session and publish and subscribe
+                to audio-video streams ... all in just a few lines of code.</p>
 
 		        <ol>
                 
-		        <li>Include jQuery and the jquery.opentok scripts in your HTML page:</li>
+		        <li>Include jQuery and the jquery.opentok scripts in your HTML page:<br/>
                 
 		        <pre>&lt;head&gt;
     &lt;script type="text/javascript" src="jquery-1.5.2.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" src="jquery.opentok.js"&gt;&lt;/script&gt;
 &lt;/head&gt;
 </pre>
+				</li>
                 	<li>Create a JavaScript object that contains settings for the OpenTok session 
                 (as defined by the jQuery OpenTok API). In the <code>$(document).ready()</code> handler,
                 pass the options object to the <code>$(<i>element_ID</i>).openTok()</code> method, 
-                as in the following:</li>
+                as in the following:
 
 		        <pre>&lt;script type="text/javascript"&gt;
    var openTokOptions = 
@@ -49,33 +59,27 @@
          apiKey: '1127',
          sessionId: '17e55f92e7dedd0e96262432b4c6b66c0141150b',
          connectionToken: 'devtoken',
-         cssSelector: {
-            connect: '#connectLink',
-            disconnect: '#disconnectLink',
-            publish: '#publishLink',
-            unpublish: '#unpublishLink',
-            streamContainer: '.streamContainer',
-            publisherContainer: '.publisherContainer'
-         }
       }
    
    $(document).ready(function(){
       var session = $('#opentok_container').openTok(openTokOptions);
    });
 &lt;/script&gt;</pre>
+				</li>
             
-                <li>Add HTML elements to match the properties of the <code>cssSelector</code>
-                property of the object you passed to the <code>openTok()</code> method:</li>
+                <li>Add the following HTML elements to the page:
                 
-<pre>&lt;div id="opentok_console"&gt;&lt;/div&gt;
-            &lt;div id="links"&gt;
-                &lt;a href="#" id="connectLink"&gt;Connect&lt;/a&gt;
-                &lt;a href="#" id="disconnectLink"&gt;Leave&lt;/a&gt;
-                &lt;a href="#" id="publishLink"&gt;Publish&lt;/a&gt;
-                &lt;a href="#" id="unpublishLink"&gt;Unpublish&lt;/a&gt;
-            &lt;/div&gt;
-            &lt;div id="myCamera" class="publisherContainer"&gt;&lt;/div&gt;
-            &lt;div id="streams" class="streamContainer"&gt;&lt;/div&gt;</pre>
+<pre>&lt;div id="opentok_container" class="opentok-container"&gt;
+    &lt;div id="links"&gt;
+        &lt;a href="#" class="opentok-connect"&gt;Connect&lt;/a&gt;
+        &lt;a href="#" class="opentok-disconnect"&gt;Leave&lt;/a&gt;
+        &lt;a href="#" class="opentok-publish"&gt;Publish&lt;/a&gt;
+        &lt;a href="#" class="opentok-unpublish"&gt;Unpublish&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="opentok-publisher"&gt;&lt;/div&gt;
+    &lt;div class="opentok-streams"&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+				</li>
             
           	</ol>
 		  	<p>When you click the <strong>Connect</strong> link, the page connects to
@@ -83,6 +87,9 @@
             to publish your webcam's video to the session.</p>
             
             <p>The settings used in this example connect to the OpenTok Basic Tuturial session.
+            This simple example also uses many of the default settings for the jQuery OpenTok plugin.
+            The jQuery OpenTok plugin API includes properties for adjusting these settings. For example,
+            you can change the CSS styles that the plugin uses for the user interface controls.
             For your own application, use a session ID, API key, and token strings that you
             obtain from OpenTok.</p>
 	
@@ -95,8 +102,9 @@
         
         <h3>The $.openTok() method</h3>
         
-        <p>The jQuery OpenTok plugin API includes one method: <code>openTok()</code>.
+        <p>The jQuery OpenTok plugin API includes one method: <code>openTok()</code>.</p>
         
+        <dl>
         <dt>openTok()</dt>
         <dd>Initializes an OpenTok session. This method takes one parameter, <code>openTokProperties</code>,
         which is required. The method initializes a session based on the properties of the 
@@ -123,45 +131,55 @@ $(document).ready(function(){
   var session = $('#opentok_container').openTok(openTokOptions);
 });</pre>
         </dd>
+        </dl>
         
-        <h3>OpenTok plugin options</h3>
+        <h3>$.openTok() method options</h3>
         
         <p>The code <code>openTok()</code> method has one parameter: <code>options</code>.
         The properties of the <code>options</code> object define settings for the OpenTok session,
         and they specify how the jQuery OpenTok plugin interacts with your page. The <code>options</code> 
         object includes the following properties.</p>
         
-        <dt>apiKey</code></dt>
+        <dl>
+        <dt>apiKey</dt>
 
-        <dd>The API key assigned to you by Tokbox.<br/>
+        <dd>The API key (a string) assigned to you by Tokbox. This property is required.<br/>
         
         <p><em>Note:</em> The API key used for the OpenTok tutorial sessions is "1127". You can
         register for your own OpenTok API key (for use with your sessions) at the TokBox
-        <a href="http://www.tokbox.com/opentok/api/tools/js/apikey">OpenTok developer site</a>. 
+        <a href="http://www.tokbox.com/opentok/api/tools/js/apikey">OpenTok developer site</a>.</p>
         </dd>
+        </dl>
 	
-        <dt>connectionToken</code></dt>
+        <dl>
+        <dt>connectionToken</dt>
 
         <dd>The connection token string for the Tokbox user.<br/>
         
         <p>When you are testing your application, you can simply use 
         <code>'devtoken'</code> or <code>'moderator_token'</code> test 
-        token strings. (If you do not set this property, the jQuery OpenTok 
-        plugin uses the <code>'devtoken'</code> test string by default.) 
+        token strings. However, in production, you must use a token 
+        created using the OpenTok server-side libraries. For more information, see
+        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/overview/token_creation.html">Connection
+        token creation</a> in the OpenTok documentation.</p>
+        
+        <p>If you do not set this property, the jQuery OpenTok 
+        plugin uses the <code>'devtoken'</code> test string by default.
         The <code>'devtoken'</code> test token string 
         puts the user in the role of a publisher (which restricts the user
         using the force unpublish and force disconnect moderation features). 
         The <code>'moderator_token'</code> test token string puts the user
-        in the role of a moderator (allowing them full permissions to use all
-        of the OpenTok API). However, in production, you must use a token 
-        created using the OpenTok server-side libraries. For more information, see
-        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/overview/token_creation.html">Connection
-        token creation</a> in the OpenTok documentation.</p>
+        in the role of a moderator, which grants the user full permissions 
+        to use all of the OpenTok API.</p>
         </dd>
+        </dl>
 
-        <dt>cssSelector</code></dt>
+        <dl>
+        <dt>cssSelector</dt>
 
-        <dd>Defines the CSS styles to use for the following controls:<br/>
+        <dd>An object that defines the CSS styles to use for some of the plugin user interface
+        controls. This object has the following properties (each of them strings), corresponding 
+        to the user interface controls:<br/>
         
         <ul>
         
@@ -170,58 +188,100 @@ $(document).ready(function(){
             <code>".opentok-connect"</code>.</li>
 
         	<li><code><strong>disconnect</strong></code> &#151; The style to use for the element
-            that the user clicks to connect to the OpenTok session. The default value is 
-            <code>".opentok-connect"</code>.</li>
+            that the user clicks to disconnect from the OpenTok session. The default value is 
+            <code>".opentok-disconnect"</code>.</li>
 
         	<li><code><strong>publish</strong></code> &#151; The style to use for the element
-            that the user clicks to connect to the OpenTok session. The default value is 
-            <code>".opentok-connect"</code>.</li>
+            that the user clicks to publish a stream the OpenTok session. The default value is 
+            <code>".opentok-publish"</code>.</li>
 
         	<li><code><strong>publisherContainer</strong></code> &#151; The style to use for the element
-            that the user clicks to connect to the OpenTok session. The default value is 
-            <code>".opentok-connect"</code>.</li>
+            that contains the published video stream. The default value is <code>".opentok-publisher"</code>.</li>
 
         	<li><code><strong>streamContainer</strong></code> &#151; The style to use for the element
-            that the user clicks to connect to the OpenTok session. The default value is 
+            that contains the streams that the OpenTok plugin subscribes to. The default value is 
             <code>".opentok-streams"</code>.</li>
 
         	<li><code><strong>unpublish</strong></code> &#151; The style to use for the element
-            that the user clicks to connect to the OpenTok session. The default value is 
+            that the user clicks to stop publishing a stream. The default value is 
             <code>".opentok-unpublish"</code>.</li>
 
-        </ul> 
+        </ul>
         
-        <p>This property is optional. If you do not set this property, be sure to include 
-        elements in your HTML page that use the style for the controls you wish to enable. 
-        For example, the follow code uses HTML elements that match the default <code>cssSelector</code>
-        styles:
-        </p>
+        <p>The following example sets each of these properties. It has the plugin reference
+        DOM elements with specified IDs (such as <code>"connectLink"</code>):</p>
         
-        <pre>&lt;div id='opentok_container'&gt;
-    &lt;div id="opentok_console"&gt;&lt;/div&gt;
+        <pre>var openTokOptions = 
+    {
+        apiKey: '1127',
+        sessionId: '17e55f92e7dedd0e96262432b4c6b66c0141150b',
+        connectionToken: 'devtoken',
+        cssSelector: {
+            connect: '#connectLink',
+            disconnect: '#disconnectLink',
+            publish: '#publishLink',
+            unpublish: '#unpublishLink',
+            streamContainer: '#streamContainer',
+            publisherContainer: '#publisherContainer'
+        },
+
+        logLevel: $.openTok.logLevel.debug
+    }
+var session	
+$(document).ready(function(){
+	session = $('#opentok_container').openTok(openTokOptions);
+}</pre> 
+
+		<p>For this example, add HTML elements that match the IDs of each <code>cssSelector</code>
+        property:</p>
+        
+<pre>&lt;div id='opentok_container' class="opentok-container"&gt;
+    &lt;!--div id="opentok_console"&gt;&lt;/div--&gt;
     &lt;div id="links"&gt;
         &lt;a href="#" id="connectLink"&gt;Connect&lt;/a&gt;
         &lt;a href="#" id="disconnectLink"&gt;Leave&lt;/a&gt;
         &lt;a href="#" id="publishLink"&gt;Publish&lt;/a&gt;
         &lt;a href="#" id="unpublishLink"&gt;Unpublish&lt;/a&gt;
     &lt;/div&gt;
-    &lt;div id="myCamera" class="publisherContainer"&gt;&lt;/div&gt;
-    &lt;div id="streams" class="streamContainer"&gt;&lt;/div&gt;
+    &lt;div id="publisherContainer"&gt;&lt;/div&gt;
+    &lt;div class="streamContainer"&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>     
+
+        <p>This property is optional. If you do not set this property, be sure to include 
+        elements in your HTML page that use the default style for the controls you wish to enable. 
+        For example, the follow code uses HTML elements that match the default <code>cssSelector</code>
+        styles:
+        </p>
+        
+        <pre>&lt;div id="opentok_container" class="opentok-container"&gt;
+    &lt;div id="links"&gt;
+        &lt;a href="#" class="opentok-connect"&gt;Connect&lt;/a&gt;
+        &lt;a href="#" class="opentok-disconnect"&gt;Leave&lt;/a&gt;
+        &lt;a href="#" class="opentok-publish"&gt;Publish&lt;/a&gt;
+        &lt;a href="#" class="opentok-unpublish"&gt;Unpublish&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="opentok-publisher"&gt;&lt;/div&gt;
+    &lt;div class="opentok-streams"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
 
         </dd>
+        </dl>
 
-        <dt>cssSelectorAncestor</code></dt>
+        <dl>
+        <dt>cssSelectorAncestor</dt>
 
-        <dd>The parent element of the basic controls.<br/>
+        <dd>The ID of the parent DOM element that contains the basic controls.<br/>
 
         <p>This property is optional. If you do not specify this property, the jQuery OpenTok
-        plugin uses the HTML DOM element with the ID <code>"opentok_container"</code>.
+        plugin uses <code>"opentok_container"</code> as the ID of the parent DOM element.</p>
         </dd>
+        </dl>
 
-        <dt>idPrefix</code></dt>
+        <dl>
+        <dt>idPrefix</dt>
 
-        <dd>The prefix used for the ID of DIVs the jQuery OpenTok plugin  
+        <dd>The prefix used for the ID of DIVs the jQuery OpenTok plugin creates for subscriber
+        video streams.<br/> 
         
         <p>The following shows an example of the DIV for one subscriber when you set
         this property to "myOtPrefix":</p>
@@ -240,16 +300,32 @@ $(document).ready(function(){
         &lt;/div&gt;
    &lt;/div&gt;
 &lt;/div&gt;</pre>
+
+        <p>For each subscriber DIV, the OpenTok plugin assigns an ID that starts with this prefix,
+        followed by <code>"_opentok_stream_"</code>, followed by the unique stream ID. For example,
+        if this property is set to <code>ot</code>, a resulting DIV might have the ID 
+        <code>"ot_opentok_stream_1125674756"</code>.</p>
+        
+        <p>This property is optional. If you do not specify this property, the jQuery OpenTok
+        plugin uses <code>"ot"</code> as the prefix for the DIV ID.</p>
+
         </dd>
+        </dl>
 
-	    <dt>sessionId</code></dt>
+	    <dl>
+        <dt>sessionId</dt>
 
-        <dd>The session ID of the OpenTok session. For more information, see the OpenTok documentation on 
+        <dd>The session ID (a String) of the OpenTok session. This property is required.<br/>
+        
+        <p>For more information, see the OpenTok documentation on 
         <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/overview/session_creation.html">Session 
-        creation</a>.
+        creation</a>.</p>
         </dd>
+        </dl>
 	
-        <dt>status</code></dt>
+<!-- This does not appear to be public property.... 
+        <dl>
+        <dt>status</dt>
 
         <dd>The status of the session. This has two properties:<br/>
         
@@ -259,24 +335,134 @@ $(document).ready(function(){
 
         	<li><code>publishing</code> (Boolean) &#151 Whether the user is publishing an
             audio-video stream (<code>true</code>) or not (<code>false</code>).</li>
+            
+        </ul>
 
         </dd>
+        </dl>
+-->
+        <dl>
+        <dt>streamCssSelector</dt>
 
-        <dt>streamCssSelector</code></dt>
+        <dd>An object that defines the CSS styles to use for some of the user interface controls
+        that the plugin adds for each stream it subscribes to. This object has the following 
+        properties (each of them strings), corresponding to the user interface controls:<br/>
+        
+        <ul>
+        
+        	<li><code><strong>close</strong></code> &#151; The style to use for the element
+            that the user clicks to close a stream. The default value is <code>".opentok-close"</code>.</li>
 
-        <dd>TBD 
+        	<li><code><strong>forceDisconnect</strong></code> &#151; The style to use for the element
+            that the user clicks to force the stream's publisher to disconnect. The default value is 
+            <code>".opentok-force-disconnect"</code>. Note that the user must have a connection token
+            that is assigned to the role of moderator. Otherwise, the plugin will not display the 
+            Force Disconnect HTML element. In the test sandbox environment, you can use
+            the <code>"moderator_token"</code> test token. For more information, see the 
+            <code>connectionToken</code> property of the <code>options</code> parameter in the 
+            jQuery OpenTok API.</li>
+
+        	<li><code><strong>forceUnpublish</strong></code> &#151; The CSS selector to use for the element
+            that the user clicks to force the stream's publisher to stop publishing. The default value is 
+            <code>".opentok-force-unpublish"</code>. Note that the user must have a connection token
+            that is assigned to the role of moderator. Otherwise, the plugin will not display the 
+            Force Disconnect HTML element. In the test sandbox environment, you can use
+            the <code>"moderator_token"</code> test token. For more information, see the 
+            <code>connectionToken</code> property of the <code>options</code> parameter in the 
+            jQuery OpenTok API.</li>
+
+        	<li><code><strong>mute</strong></code> &#151; The CSS selector to use for the element
+            that the user clicks to mute the stream's audio. The default value is 
+            <code>".opentok-mute"</code>.</li>
+
+        	<li><code><strong>muteToggle</strong></code> &#151; The CSS selector to use for the element
+            that the user clicks to publish a stream the OpenTok session. The default value is 
+            <code>".opentok-mute-toggle"</code>.</li>
+
+        	<li><code><strong>streamWrapper</strong></code> &#151; The CSS selector to use for the element
+            that contains the streams that the plugin subscribes to. The default value is 
+            <code>".opentok-stream"</code>.</li>
+
+        	<li><code><strong>unmute</strong></code> &#151; The CSS selector to use for the element
+            that the user clicks to unmute the stream's audio. The default value is 
+            <code>".opentok-unmute"</code>.</li>
+
+        </ul>
+        
+        <p>When setting these properties, you must also adjust the <code>streamWrapper</code> 
+        property of the <code>options</code> parameter of the <code>$.openTok()</code> method. 
+        The <code>streamWrapper</code> property contains the HTML string that the plugin uses
+        to display each subscribed stream:</p>
+        
+        <p>The following example sets some of these properties. It also adjusts the <code>streamWrapper</code> 
+        property:</p>
+        
+        <pre>var openTokOptions = 
+    {
+        apiKey: '1127',
+        sessionId: '17e55f92e7dedd0e96262432b4c6b66c0141150b',
+        connectionToken: 'moderator_token',
+        streamCssSelector: {
+            close: ".example-ot-close",
+            mute: ".example-ot-mute",
+            unmute: ".example-ot-unmute",
+            forceUnpublish: ".example-ot-force-unpublish",
+            streamWrapper: ".example-ot-stream",
+        },
+      streamWrapper: 
+         '&lt;div &gt; \
+         	&lt;div class="opentok-stream"&gt;&lt;/div&gt; \
+			&lt;br style="clear:both" /&gt; \
+            &lt;div&gt; \
+				&lt;a href="#" class="opentok-mute-toggle"&gt;Mute&lt;/a&gt; \
+				&lt;a href="#" class="opentok-unmute"&gt;Unmute&lt;/a&gt; \
+				&lt;a href="#" class="opentok-force-unpublish"&gt;Force Unpublish&lt;/a&gt; \
+				&lt;a href="#" class="opentok-close"&gt;Close&lt;/a&gt; \
+			&lt;/div&gt; \
+         &lt;/div&gt;'
+    }
+var session	
+$(document).ready(function(){
+	session = $('#opentok_container').openTok(openTokOptions);
+}</pre>  
+
+        <p>Be sure that the CSS selectors you define match the class names in the 
+        <code>streamWrapper</code> HTML string.</p>
+        
+        <p>This property is optional. If you do not set it, the plugin uses the default CSS selectors
+        as listed for each property of this object.</p>
+
         </dd>
+        </dl>
 
-        <dt>streamWrapper</code></dt>
+        <dl>
+        <dt>streamWrapper</dt>
 
-        <dd>TBD 
+        <dd>This string defines the HTML to be used to display each OpenTok stream that
+        the session subscribes to. <br/>
+        
+        <p>The default value defines the following HTML:</p>
+        
+        <pre>
+&lt;div class="opentok-stream"&gt;
+    &lt;a href="#" class="opentok-mute"&gt;Mute&lt;/a&gt;
+    &lt;a href="#" class="opentok-unmute"&gt;Unmute&lt;/a&gt;
+    &lt;a href="#" class="opentok-close"&gt;Close&lt;/a&gt;
+&lt;/div&gt;</pre>
+        
+        <p>If you use the default stream, be sure to add CSS definitions for each of the referenced classes.
+        These CSS definitions modify the appearance of the controls in the stream container. For example,
+        you may want to set the <code>float</code> property for each of these classes.</p>
+
         </dd>
+        </dl>
 
 	<h3>$.openTok properties</h3>
     
-    	<p>The jQuery OpenTok plugin API includes the following properties.
+    	<p>The jQuery OpenTok plugin API includes the following properties.</p>
 
-        <dt>logLevel</code></dt>
+        <dl>
+        <dt>logLevel</dt>
 
         <dd>The logging level to use for the OpenTok session. You can set this property to
         one of the following values:<br/>
@@ -292,25 +478,36 @@ $(document).ready(function(){
         
         <p>For more information, see the OpenTok documentation for 
         <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/TB.html#setLogLevel">TB.setLogLevel</a>.
+        </p>
         </dd>
+        </dl>
 
-        <dt>publisher</code></dt>
+<!-- These do not appear to be public properties.... 
+
+        <dl>
+        <dt>publisher</dt>
 
         <dd>TBD 
         </dd>
+        </dl>
 
-        <dt>session</code></dt>
-
-        <dd>TBD 
-        </dd>
-
-        </dd>
-
-        <dt>streams</code></dt>
+        <dl>
+        <dt>session</dt>
 
         <dd>TBD 
         </dd>
+        </dl>
 
+        </dd>
+        </dl>
+
+        <dl>
+        <dt>streams</dt>
+
+        <dd>TBD 
+        </dd>
+        </dl>
+-->
 
 </body>
 </html>
