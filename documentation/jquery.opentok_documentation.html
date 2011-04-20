@@ -300,8 +300,6 @@ $(document).ready(function(){
             streamContainer: '#streamContainer',
             publisherContainer: '#publisherContainer'
         },
-
-        logLevel: $.openTok.logLevel.debug
     }
 var session	
 $(document).ready(function(){
@@ -385,6 +383,27 @@ $(document).ready(function(){
         <p>This property is optional. If you do not specify this property, the jQuery OpenTok
         plugin uses <code>"ot"</code> as the prefix for the DIV ID.</p>
 
+        </dd>
+        </dl>
+
+        <dl>
+        <dt>logLevel</dt>
+
+        <dd>The logging level to use for the OpenTok session. You can set this property to
+        one of the following values:<br/>
+        
+        <ul>
+        	<li><code>$.openTok.logLevel.none</code> &#151; API logging is disabled (the default). </li>
+        	<li><code>$.openTok.logLevel.error</code> &#151; Logging of errors only.</li>
+        	<li><code>$.openTok.logLevel.warn</code> &#151; Logging of warnings and errors. </li>
+        	<li><code>$.openTok.logLevel.info</code> &#151; Logging of other useful information, in addition 
+            	to warnings and errors</li>
+        	<li><code>$.openTok.logLevel.debug</code> &#151; Fine-grained logging of all API actions.</li>
+		</ul>
+        
+        <p>For more information, see the OpenTok documentation for 
+        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/TB.html#setLogLevel">TB.setLogLevel</a>.
+        </p>
         </dd>
         </dl>
 
@@ -583,27 +602,13 @@ $(document).ready(function(){
 
 	<h3>$.openTok properties</h3>
     
-    	<p>The jQuery OpenTok plugin API includes the following properties.</p>
+    	<p>The jQuery OpenTok plugin API includes one property.</p>
 
         <dl>
         <dt>logLevel</dt>
 
-        <dd>The logging level to use for the OpenTok session. You can set this property to
-        one of the following values:<br/>
-        
-        <ul>
-        	<li><code>$.openTok.logLevel.none</code> &#151; API logging is disabled (the default). </li>
-        	<li><code>$.openTok.logLevel.error</code> &#151; Logging of errors only.</li>
-        	<li><code>$.openTok.logLevel.warn</code> &#151; Logging of warnings and errors. </li>
-        	<li><code>$.openTok.logLevel.info</code> &#151; Logging of other useful information, in addition 
-            	to warnings and errors</li>
-        	<li><code>$.openTok.logLevel.debug</code> &#151; Fine-grained logging of all API actions.</li>
-		</ul>
-        
-        <p>For more information, see the OpenTok documentation for 
-        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/TB.html#setLogLevel">TB.setLogLevel</a>.
-        </p>
-        </dd>
+        <dd>Defines possible values for the <code>logLevel</code> property of the <code>options</code>
+        parameter of the <code>$.openTok()</code> method.</dd>
         </dl>
 
 <!-- These do not appear to be public properties.... 
