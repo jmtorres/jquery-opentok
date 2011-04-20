@@ -204,30 +204,6 @@ $(document).ready(function(){
         </dl>
 	
         <dl>
-        <dt>connectionCreated</dt>
-        <dd>Set this to a function you wish to use as the event listener for the <code>connectionCreated</code>
-        event. The default value is "openTok_connectionCreated". If you do not change the default
-        value, you can define an openTok_connectionCreated() function as the event handler.<br/>
-        
-        <p>For more information on the <code>connectionCreated</code> event, see the OpenTok documentation on
-        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/Session.html#events">Session
-        events</a>.</p>
-        </dd>
-        </dl>
-
-        <dl>
-        <dt>connectionDestroyed</dt>
-        <dd>Set this to a function you wish to use as the event listener for the <code>connectionDestroyed</code>
-        event. The default value is "openTok_connectionDestroyed". If you do not change the default
-        value, you can define an openTok_connectionDestroyed() function as the event handler.
-
-        <p>For more information on the <code>connectionDestroyed</code> event, see the OpenTok documentation on
-        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/Session.html#events">Session
-        events</a>.</p>
-        </dd>
-        </dl>
-
-        <dl>
         <dt>connectionToken</dt>
 
         <dd>The connection token string for the Tokbox user.<br/>
@@ -407,30 +383,6 @@ $(document).ready(function(){
         </dd>
         </dl>
 
-        <dl>
-        <dt>sessionConnected</dt>
-        <dd>Set this to a function you wish to use as the event listener for the streamDestroyed
-        event. The default value is "openTok_sessionConnected". If you do not change the default
-        value, you can define an openTok_sessionConnected() function as the event handler.
-
-        <p>For more information on the <code>sessionConnected</code> event, see the OpenTok documentation on
-        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/Session.html#events">Session
-        events</a>.</p>
-        </dd>
-        </dl>
-
-        <dl>
-        <dt>sessionDisconnected</dt>
-        <dd>Set this to a function you wish to use as the event listener for the streamDestroyed
-        event. The default value is "openTok_sessionDisconnected". If you do not change the default
-        value, you can define an openTok_sessionDisconnected() function as the event handler.
-
-        <p>For more information on the <code>sessionDisconnected</code> event, see the OpenTok documentation on
-        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/Session.html#events">Session
-        events</a>.</p>
-        </dd>
-        </dl>
-
 	    <dl>
         <dt>sessionId</dt>
 
@@ -460,18 +412,6 @@ $(document).ready(function(){
         </dd>
         </dl>
 -->
-
-        <dl>
-        <dt>streamCreated</dt>
-        <dd>Set this to a function you wish to use as the event listener for the streamDestroyed
-        event. The default value is "openTok_streamCreated". If you do not change the default
-        value, you can define an openTok_streamCreated() function as the event handler.
-
-        <p>For more information on the <code>streamCreated</code> event, see the OpenTok documentation on
-        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/Session.html#events">Session
-        events</a>.</p>
-        </dd>
-        </dl>
 
         <dl>
         <dt>streamCssSelector</dt>
@@ -568,18 +508,6 @@ $(document).ready(function(){
         </dl>
 
         <dl>
-        <dt>streamDestroyed</dt>
-        <dd>Set this to a function you wish to use as the event listener for the streamDestroyed
-        event. The default value is "openTok_streamDestroyed". If you do not change the default
-        value, you can define an openTok_streamDestroyed() function as the event handler.
-
-        <p>For more information on the <code>streamDestroyed</code> event, see the OpenTok documentation on
-        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/Session.html#events">Session
-        events</a>.</p>
-        </dd>
-        </dl>        
-
-        <dl>
         <dt>streamWrapper</dt>
 
         <dd>This string defines the HTML to be used to display each OpenTok stream that
@@ -638,6 +566,37 @@ $(document).ready(function(){
         </dl>
 -->
 
+		<h3>Events</h3>
+       
+        <p>The jQuery OpenTok API has the following events:</p>
+       
+        <ul>
+       
+            <li><code>connectionCreated</code></li>
+            <li><code>connectionDestroyed</code></li>
+            <li><code>sessionConnected</code></li>
+            <li><code>sessionDisconnected</code></li>
+            <li><code>streamCreated</code></li>
+            <li><code>streamDestroyed</code></li>
+		</ul>
+        <p>These correspond to the events dispatched by the OpenTok Session object. For more information,
+        see the OpenTok documentation on
+        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/Session.html#events">Session
+        events</a>.</p>
+       
+        <p>To add event listeners for these events, use the jQuery <code>bind()</code> method:</p>
+       
+<pre>$(document).ready(function() {
+	session = $('#opentok_container').openTok(openTokOptions);
+	session.bind($.openTok.event.sessionConnected, connectedHandler);
+});
+function sessionConnectedHandler(event) {
+   var sessionConnectEvent = event.openTok.eventData;
+   alert("You are connected to the session. (Number of participants: " + sessionConnectEvent.connections.length + ".)");
+}
+</pre>
+		<p>Note that the OpenTok event object is the <code>openTok.eventData</code> property of the
+        jQuery event object.</p>
 
 </body>
 </html>
