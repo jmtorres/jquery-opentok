@@ -63,8 +63,8 @@
          connectionToken: 'devtoken'
       }
    
-   $(document).ready(function(){
-      var session = $('#opentok_container').openTok(openTokOptions);
+   $(document).ready(function() {
+      $('#opentok_container').openTok(openTokOptions);
    });
 &lt;/script&gt;</pre>
 				</li>
@@ -158,13 +158,14 @@
         <dl>
         <dt>openTok()</dt>
 
-        <dd>Initializes an OpenTok session. This method takes one parameter, <code>openTokProperties</code>,
+        <dd>Initializes an OpenTok session. This method takes one parameter, <code>options</code>,
         which is required. The method initializes a session based on the properties of the 
-        <code>openTokProperties</code> object.<br/>
+        <code>options</code> object.<br/>
         
         <p>Calling this method does <i>not</i> connect to the session. To connect to the session, click the 
         HTML element you assign to the <code>connect</code> property of the <code>cssSelector</code>
-        property of the <code>openTokOptions</code> parameter.</p>
+        property of the <code>openTokOptions</code> parameter. (See <a href="#options">$.openTok() method
+        options</a>.)</p>
         
         <p>This method is chainable.</p>
 
@@ -179,13 +180,13 @@
       }
    }
    
-$(document).ready(function(){
-  var session = $('#opentok_container').openTok(openTokOptions);
+$(document).ready(function() {
+  $('#opentok_container').openTok(openTokOptions);
 });</pre>
         </dd>
         </dl>
         
-        <h3>$.openTok() method options</h3>
+        <a name="options"></a><h3>$.openTok() method options</h3>
         
         <p>The code <code>openTok()</code> method has one parameter: <code>options</code>.
         The properties of the <code>options</code> object define settings for the OpenTok session,
@@ -229,7 +230,7 @@ $(document).ready(function(){
         <dl>
         <dt>cssSelector</dt>
 
-        <dd>An object that defines the CSS styles to use for some of the plugin user interface
+        <dd>An object that defines the CSS selectors to use for some of the plugin user interface
         controls. This object has the following properties (each of them strings), corresponding 
         to the user interface controls:<br/>
         
@@ -277,9 +278,9 @@ $(document).ready(function(){
             publisherContainer: '#publisherContainer'
         },
     }
-var session	
-$(document).ready(function(){
-	session = $('#opentok_container').openTok(openTokOptions);
+
+$(document).ready(function() {
+	$('#opentok_container').openTok(openTokOptions);
 }</pre> 
 
 		<p>For this example, add HTML elements that match the IDs of each <code>cssSelector</code>
@@ -300,7 +301,7 @@ $(document).ready(function(){
         <p>This property is optional. If you do not set this property, be sure to include 
         elements in your HTML page that use the default style for the controls you wish to enable. 
         For example, the follow code uses HTML elements that match the default <code>cssSelector</code>
-        styles:
+        settings:
         </p>
         
         <pre>&lt;div id="opentok_container" class="opentok-container"&gt;
@@ -362,7 +363,7 @@ $(document).ready(function(){
         </dd>
         </dl>
 
-        <dl>
+        <a name="logLevel"></a><dl>
         <dt>logLevel</dt>
 
         <dd>The logging level to use for the OpenTok session. You can set this property to
@@ -376,6 +377,21 @@ $(document).ready(function(){
             	to warnings and errors</li>
         	<li><code>$.openTok.logLevel.debug</code> &#151; Fine-grained logging of all API actions.</li>
 		</ul>
+        
+        <p>For example, the following code sets up an OpenTok session and sets the logging level to
+        debug:</p>
+        
+<pre>var openTokOptions = 
+   {
+      apiKey: '1127',
+      sessionId: '17e55f92e7dedd0e96262432b4c6b66c0141150b',
+      connectionToken: 'moderator_token',
+      logLevel: $.openTok.logLevel.debug
+   }
+
+$(document).ready(function() {
+	$('#opentok_container').openTok(openTokOptions);
+});</pre>
         
         <p>For more information, see the OpenTok documentation for 
         <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/TB.html#setLogLevel">TB.setLogLevel</a>.
@@ -481,21 +497,21 @@ $(document).ready(function(){
             forceUnpublish: ".example-ot-force-unpublish",
             streamWrapper: ".example-ot-stream",
         },
-      streamWrapper: 
-         '&lt;div &gt; \
-         	&lt;div class="opentok-stream"&gt;&lt;/div&gt; \
-			&lt;br style="clear:both" /&gt; \
-            &lt;div&gt; \
-				&lt;a href="#" class="opentok-mute-toggle"&gt;Mute&lt;/a&gt; \
-				&lt;a href="#" class="opentok-unmute"&gt;Unmute&lt;/a&gt; \
-				&lt;a href="#" class="opentok-force-unpublish"&gt;Force Unpublish&lt;/a&gt; \
-				&lt;a href="#" class="opentok-close"&gt;Close&lt;/a&gt; \
-			&lt;/div&gt; \
-         &lt;/div&gt;'
+        streamWrapper: 
+             '&lt;div &gt; \
+                &lt;div class="example-ot-stream"&gt;&lt;/div&gt; \
+                &lt;br style="clear:both" /&gt; \
+                &lt;div&gt; \
+                    &lt;a href="#" class="example-ot-mute"&gt;Mute&lt;/a&gt; \
+                    &lt;a href="#" class="example-ot-unmute"&gt;Unmute&lt;/a&gt; \
+                    &lt;a href="#" class="example-ot-force-unpublish"&gt;Force Unpublish&lt;/a&gt; \
+                    &lt;a href="#" class="example-ot-close"&gt;Close&lt;/a&gt; \
+                &lt;/div&gt; \
+             &lt;/div&gt;'
     }
-var session	
-$(document).ready(function(){
-	session = $('#opentok_container').openTok(openTokOptions);
+
+$(document).ready(function() {
+   $('#opentok_container').openTok(openTokOptions);
 }</pre>  
 
         <p>Be sure that the CSS selectors you define match the class names in the 
@@ -510,10 +526,70 @@ $(document).ready(function(){
         <dl>
         <dt>streamWrapper</dt>
 
-        <dd>This string defines the HTML to be used to display each OpenTok stream that
-        the session subscribes to. <br/>
+        <dd>This defines the HTML to be used to display each OpenTok stream that
+        the session subscribes to. You can set this to either a string (of HTML)
+        or to a function.<br/>
+
+        <p>If you set this to a function, the function takes two parameters:
+        <code>session</code> (the OpenTok Session object) and <code>stream</code>
+        (the OpenTok Stream object). The function should return the HTML string
+        to use for each stream.</p>
         
-        <p>The default value defines the following HTML:</p>
+        <p>The following code sets the <code>streamWrapper</code> property to a string:</p>
+        
+<pre>var openTokOptions = 
+    {
+        apiKey: '1127',
+        sessionId: '17e55f92e7dedd0e96262432b4c6b66c0141150b',
+        connectionToken: 'devtoken',
+        streamWrapper: streamWrapperFn:
+            '&lt;div &gt; \
+                 &lt;div class="opentok-stream"&gt;&lt;/div&gt; \
+                 &lt;br style="clear:both" /&gt; \
+                 &lt;div&gt; \
+                    &lt;a href="#" class="opentok-mute-toggle"&gt;Mute&lt;/a&gt; \
+                    &lt;a href="#" class="opentok-unmute"&gt;Unmute&lt;/a&gt; \
+                    &lt;a href="#" class="opentok-force-unpublish"&gt;Force Unpublish&lt;/a&gt; \
+                    &lt;a href="#" class="opentok-close"&gt;Close&lt;/a&gt; \
+                 &lt;/div&gt; \
+             &lt;/div&gt;'
+    }
+
+$(document).ready(function() {
+   $('#opentok_container').openTok(openTokOptions);
+});</pre>
+        
+        <p>The following code sets the <code>streamWrapper</code> property to a function
+        that returns the HTML string:</p>
+        
+<pre>var openTokOptions = 
+    {
+        apiKey: '1127',
+        sessionId: '17e55f92e7dedd0e96262432b4c6b66c0141150b',
+        connectionToken: 'devtoken',
+        streamWrapper: streamWrapperFn
+    }
+
+function streamWrapperFn(session, stream) {
+   return  '&lt;div &gt; \
+     &lt;div&gt;Stream: ' + stream.streamId + '&lt;/div&gt; \
+     &lt;br style="clear:both" /&gt; \
+        &lt;div class="opentok-stream"&gt;&lt;/div&gt; \
+        &lt;br style="clear:both" /&gt; \
+        &lt;div&gt; \
+            &lt;a href="#" class="opentok-mute-toggle"&gt;Mute&lt;/a&gt; \
+            &lt;a href="#" class="opentok-unmute"&gt;Unmute&lt;/a&gt; \
+            &lt;a href="#" class="opentok-force-unpublish"&gt;Force Unpublish&lt;/a&gt; \
+            &lt;a href="#" class="opentok-close"&gt;Close&lt;/a&gt; \
+        &lt;/div&gt; \
+     &lt;/div&gt;';
+}
+
+$(document).ready(function() {
+   $('#opentok_container').openTok(openTokOptions);
+});</pre>
+        
+        <p>The default value defines the following HTML string:</p>
         
         <pre>
 &lt;div class="opentok-stream"&gt;
@@ -523,8 +599,7 @@ $(document).ready(function(){
 &lt;/div&gt;</pre>
         
         <p>If you use the default stream, be sure to add CSS definitions for each of the referenced classes.
-        These CSS definitions modify the appearance of the controls in the stream container. For example,
-        you may want to set the <code>float</code> property for each of these classes.</p>
+        These CSS definitions modify the appearance of the controls in the stream container. </p>
         </dd>
         </dl>
 
@@ -535,37 +610,11 @@ $(document).ready(function(){
         <dl>
         <dt>logLevel</dt>
 
-        <dd>Defines possible values for the <code>logLevel</code> property of the <code>options</code>
-        parameter of the <code>$.openTok()</code> method.</dd>
-        </dl>
-
-<!-- These do not appear to be public properties.... 
-
-        <dl>
-        <dt>publisher</dt>
-
-        <dd>TBD 
+        <dd>Defines possible values for the <a href="#logLevel"><code>logLevel</code></a> property 
+        of the <code>options</code> parameter of the <code>$.openTok()</code> method.
         </dd>
         </dl>
-
-        <dl>
-        <dt>session</dt>
-
-        <dd>TBD 
-        </dd>
-        </dl>
-
-        </dd>
-        </dl>
-
-        <dl>
-        <dt>streams</dt>
-
-        <dd>TBD 
-        </dd>
-        </dl>
--->
-
+        
 		<h3>Events</h3>
        
         <p>The jQuery OpenTok API has the following events:</p>
@@ -587,9 +636,10 @@ $(document).ready(function(){
         <p>To add event listeners for these events, use the jQuery <code>bind()</code> method:</p>
        
 <pre>$(document).ready(function() {
-	session = $('#opentok_container').openTok(openTokOptions);
-	session.bind($.openTok.event.sessionConnected, connectedHandler);
+   openTok = $('#opentok_container').openTok(openTokOptions);
+   openTok.bind($.openTok.event.sessionConnected, connectedHandler);
 });
+
 function sessionConnectedHandler(event) {
    var sessionConnectEvent = event.openTok.eventData;
    alert("You are connected to the session. (Number of participants: " + sessionConnectEvent.connections.length + ".)");
