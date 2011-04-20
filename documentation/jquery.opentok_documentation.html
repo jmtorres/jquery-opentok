@@ -22,6 +22,8 @@
         }
 	h2 {margin-top:48px}
 	h3 {margin-top:32px}
+	ol li {margin-bottom:12px;
+		margin-left:-12px}
     </style>
 </head>
 
@@ -58,7 +60,7 @@
       {
          apiKey: '1127',
          sessionId: '17e55f92e7dedd0e96262432b4c6b66c0141150b',
-         connectionToken: 'devtoken',
+         connectionToken: 'devtoken'
       }
    
    $(document).ready(function(){
@@ -82,9 +84,58 @@
 				</li>
             
           	</ol>
-		  	<p>When you click the <strong>Connect</strong> link, the page connects to
-            the OpenTok session. Then you can click the <strong>Publish</strong> link
-            to publish your webcam's video to the session.</p>
+            
+            <p>Now you can test the page:</p>
+            
+                <ol>
+                
+                    <li>If you are opening the page from the local filesystem (instead of a web server), 
+                    set Flash Player to grant access to the page:
+                    
+                    <ol style="list-style:lower-alpha">
+                    
+                    <li>Open this link in a new browser window: 
+                    <a href="http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html" target="fpSettingsManager">http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html</a>.</li>
+                    
+                    <li>In the <strong>Alway trust files in these locations</strong> list click the <strong>Edit
+                    locations</strong> link and select <strong>Add location</strong>.</li>
+                    
+                    <li>Click <strong>Browse for folder</strong>, navigate to the folder that contains the 
+                    HTML file, and then click the <strong>Open</strong> button.</li>
+                    
+                    <li>Click the <strong>Always Allow</strong> button.</li>
+                    
+                    </ol>
+    		</li>
+    
+            <li>Make sure that you have a webcam connected to your computer and configured to run.
+            Then open the page in a web browser.</li>
+            
+		  	<li>Click the <strong>Connect</strong> link. The page connects to
+            the OpenTok session. The example now connects to a sample OpenTok session. 
+            It displays any other video streams in the session (if there are any).</li>
+            
+            <li>Click the <strong>Publish</strong> link to publish your webcam's video to the session.</li>
+            
+            <li>If the <strong>Flash Player Settings</strong> dialog box is displayed, click 
+            the <strong>Allow</strong> button. This grants the application access to your camera 
+            and microphone. The application displays your video and publishes it to the session.
+            </li>
+            
+            <li>Mute the speaker on your computer. (For this test app, this will prevent audio feedback.)</li>
+            
+            <li>Copy the URL for this page into the Clipboard.</li>
+            
+            <li>Open a new browser window, and have it open to the copied URL.</li>
+            
+            </ol>
+            
+            <p>For test purposes, you can view the page in the new browser window on your computer. Or
+            you can open it on another computer (as would happen in a real session.)</p>
+            
+            <p>The new page now connects to the session. Upon connection the video stream
+            from the other page is displayed on the page and the new published video stream
+            appears on both pages.</p>
             
             <p>The settings used in this example connect to the OpenTok Basic Tuturial session.
             This simple example also uses many of the default settings for the jQuery OpenTok plugin.
@@ -106,6 +157,7 @@
         
         <dl>
         <dt>openTok()</dt>
+
         <dd>Initializes an OpenTok session. This method takes one parameter, <code>openTokProperties</code>,
         which is required. The method initializes a session based on the properties of the 
         <code>openTokProperties</code> object.<br/>
@@ -151,6 +203,30 @@ $(document).ready(function(){
         </dd>
         </dl>
 	
+        <dl>
+        <dt>connectionCreated</dt>
+        <dd>Set this to a function you wish to use as the event listener for the <code>connectionCreated</code>
+        event. The default value is "openTok_connectionCreated". If you do not change the default
+        value, you can define an openTok_connectionCreated() function as the event handler.<br/>
+        
+        <p>For more information on the <code>connectionCreated</code> event, see the OpenTok documentation on
+        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/Session.html#events">Session
+        events</a>.</p>
+        </dd>
+        </dl>
+
+        <dl>
+        <dt>connectionDestroyed</dt>
+        <dd>Set this to a function you wish to use as the event listener for the <code>connectionDestroyed</code>
+        event. The default value is "openTok_connectionDestroyed". If you do not change the default
+        value, you can define an openTok_connectionDestroyed() function as the event handler.
+
+        <p>For more information on the <code>connectionDestroyed</code> event, see the OpenTok documentation on
+        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/Session.html#events">Session
+        events</a>.</p>
+        </dd>
+        </dl>
+
         <dl>
         <dt>connectionToken</dt>
 
@@ -312,6 +388,30 @@ $(document).ready(function(){
         </dd>
         </dl>
 
+        <dl>
+        <dt>sessionConnected</dt>
+        <dd>Set this to a function you wish to use as the event listener for the streamDestroyed
+        event. The default value is "openTok_sessionConnected". If you do not change the default
+        value, you can define an openTok_sessionConnected() function as the event handler.
+
+        <p>For more information on the <code>sessionConnected</code> event, see the OpenTok documentation on
+        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/Session.html#events">Session
+        events</a>.</p>
+        </dd>
+        </dl>
+
+        <dl>
+        <dt>sessionDisconnected</dt>
+        <dd>Set this to a function you wish to use as the event listener for the streamDestroyed
+        event. The default value is "openTok_sessionDisconnected". If you do not change the default
+        value, you can define an openTok_sessionDisconnected() function as the event handler.
+
+        <p>For more information on the <code>sessionDisconnected</code> event, see the OpenTok documentation on
+        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/Session.html#events">Session
+        events</a>.</p>
+        </dd>
+        </dl>
+
 	    <dl>
         <dt>sessionId</dt>
 
@@ -341,6 +441,19 @@ $(document).ready(function(){
         </dd>
         </dl>
 -->
+
+        <dl>
+        <dt>streamCreated</dt>
+        <dd>Set this to a function you wish to use as the event listener for the streamDestroyed
+        event. The default value is "openTok_streamCreated". If you do not change the default
+        value, you can define an openTok_streamCreated() function as the event handler.
+
+        <p>For more information on the <code>streamCreated</code> event, see the OpenTok documentation on
+        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/Session.html#events">Session
+        events</a>.</p>
+        </dd>
+        </dl>
+
         <dl>
         <dt>streamCssSelector</dt>
 
@@ -350,10 +463,10 @@ $(document).ready(function(){
         
         <ul>
         
-        	<li><code><strong>close</strong></code> &#151; The style to use for the element
+        	<li><code><strong>close</strong></code> &#151; The CSS selector to use for the element
             that the user clicks to close a stream. The default value is <code>".opentok-close"</code>.</li>
 
-        	<li><code><strong>forceDisconnect</strong></code> &#151; The style to use for the element
+        	<li><code><strong>forceDisconnect</strong></code> &#151; The CSS selector to use for the element
             that the user clicks to force the stream's publisher to disconnect. The default value is 
             <code>".opentok-force-disconnect"</code>. Note that the user must have a connection token
             that is assigned to the role of moderator. Otherwise, the plugin will not display the 
@@ -436,6 +549,18 @@ $(document).ready(function(){
         </dl>
 
         <dl>
+        <dt>streamDestroyed</dt>
+        <dd>Set this to a function you wish to use as the event listener for the streamDestroyed
+        event. The default value is "openTok_streamDestroyed". If you do not change the default
+        value, you can define an openTok_streamDestroyed() function as the event handler.
+
+        <p>For more information on the <code>streamDestroyed</code> event, see the OpenTok documentation on
+        <a href="http://www.tokbox.com/opentok/api/tools/js/documentation/api/Session.html#events">Session
+        events</a>.</p>
+        </dd>
+        </dl>        
+
+        <dl>
         <dt>streamWrapper</dt>
 
         <dd>This string defines the HTML to be used to display each OpenTok stream that
@@ -453,7 +578,6 @@ $(document).ready(function(){
         <p>If you use the default stream, be sure to add CSS definitions for each of the referenced classes.
         These CSS definitions modify the appearance of the controls in the stream container. For example,
         you may want to set the <code>float</code> property for each of these classes.</p>
-
         </dd>
         </dl>
 
@@ -508,6 +632,7 @@ $(document).ready(function(){
         </dd>
         </dl>
 -->
+
 
 </body>
 </html>
