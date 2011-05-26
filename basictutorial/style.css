@@ -1,0 +1,18 @@
+#links a,
+#links a:visited {
+    -moz-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+
+    background-color: #E4E4E4;
+    color: #4C4C4C;
+
+    border: 1px solid #BBBBBB;
+    padding: 5px 10px;
+
+    text-align: center;
+    text-decoration: none;
+}
+
+#links {
+    height: 100px;
+}

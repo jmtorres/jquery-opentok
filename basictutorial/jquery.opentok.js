@@ -236,6 +236,7 @@
       session.addEventListener("streamDestroyed", function(e) {
         e.preventDefault();
         for(var i = 0; i < e.streams.length; i++){
+          //OpenTokLayoutContainer.removeStream($.openTok.prototype.options.idPrefix + "_opentok_stream_" + e.streams[i].streamId);
           self._removeStream(e.streams[i]);
         }
         self._trigger($.openTok.event.streamDestroyed, e);
