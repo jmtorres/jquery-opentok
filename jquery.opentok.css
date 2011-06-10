@@ -1,0 +1,78 @@
+.opentok-streams{
+  clear:both;
+}
+
+.opentok-publisher-wrapper,
+.opentok-stream-wrapper{
+  float:left;
+  margin: 4px 2px;
+  border-radius:3px;
+  position: relative;
+}
+
+.opentok-username{
+  float:left;
+}
+
+.opentok-publisher-controls,
+.opentok-stream-controls{
+  float:right;
+}
+.opentok-controls a,
+.opentok-publisher-controls a,
+.opentok-stream-controls a{
+  display:block;
+  width:16px;
+  height:16px;
+  text-indent:-99999px;
+  float:left;
+  margin:2px;
+}
+
+a.opentok-connect{
+  background-image: url(images/webcam_connect.png);
+}
+
+a.opentok-disconnect{
+  background-image: url(images/webcam_delete.png);
+}
+
+a.opentok-publish{
+  background-image: url(images/webcam_start.png);
+}
+
+a.opentok-unpublish{
+  background-image: url(images/webcam_stop.png);
+}
+
+a.opentok-push-talk-mode{
+  background-image: url(images/headset.png);
+}
+
+a.opentok-push-talk-mode.pushTalkEnabled{
+  background-image: url(images/microphone.png);
+}
+
+a.opentok-push-talk-toggle{  
+  background-image: url(images/microphone_arrow.png);
+}
+
+a.opentok-mute{
+  background-image: url(images/sound.png);
+}
+
+a.opentok-unmute{
+  background-image: url(images/sound_mute.png);
+}
+
+a.opentok-close{
+  background-image: url(images/cancel.png);
+}
+
+a.opentok-force-unpublish{
+  background-image: url(images/webcam_stop.png);
+}
+
+a.opentok-force-disconnect{
+  background-image: url(images/user_cross.png);
+}

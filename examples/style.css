@@ -16,3 +16,13 @@
 #links {
     height: 100px;
 }
+
+.subscriberContainer{
+  width:600px;
+  height:400px;
+}
+
+.publiserContainer,
+.opentok-stream{
+  float:left;
+}

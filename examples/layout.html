@@ -1,0 +1,48 @@
+
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>OpenTok API Sample &#151; Layout Tutorial</title>
+        <link href="../jquery.opentok.css" type="text/css" rel="stylesheet" >
+        <link href="../jquery.opentok.layout.css" type="text/css" rel="stylesheet" >
+
+
+        <script src="http://staging.tokbox.com/v0.91/js/TB.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../jquery.opentok.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../jquery.opentok.layout.js" type="text/javascript" charset="utf-8"></script>
+
+        <script type="text/javascript" charset="utf-8">
+            (function($){
+                $(document).ready(function(){
+                    $('.opentok-container').openTok({
+                        apiKey: 1127,
+                        sessionId: '17e55f92e7dedd0e96262432b4c6b66c0141150b',
+                        connectionToken: 'devtoken',
+                        streamWrapper: '<div class="opentok-stream" style="display:hidden;visible:none"></div><div class="opentok-stream-wrapper"><div class="opentok-stream-controls"><a href="#" class="opentok-mute">Mute</a><a href="#" class="opentok-unmute">Unmute</a><a href="#" class="opentok-close">Close</a></div><div class="opentok-stream"></div>',
+                    })
+                    .openTokLayout();
+                });
+            })(jQuery);
+        </script>
+    </head>
+    <body>
+        <div class='opentok-container'>
+            <div class='opentok-controls'>
+                <a href="#" class="opentok-connect">Connect</a>
+                <a href="#" class="opentok-disconnect">Disconnect</a>
+                <a href="#" class="opentok-publish">Publish</a>
+            </div>
+            <div class="opentok-streams">
+                <div class="opentok-publisher-wrapper">
+                    <div class="opentok-publisher-controls">
+                        <a href="/" class="opentok-push-talk-mode">Push To Talk</a>
+                        <a href="/" class="opentok-push-talk-toggle">Talk</a>
+                        <a href="/" class="opentok-unpublish">Unpublish</a>
+                    </div>
+                    <div class="opentok-publisher"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

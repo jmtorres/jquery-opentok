@@ -1,0 +1,30 @@
+.opentok-streams{
+  clear:both;
+  height:400px;
+  padding: 20px;
+  background:grey;
+  overflow:hidden;
+}
+
+.opentok-publisher-wrapper,
+.opentok-stream-wrapper{
+  margin: 6px;
+  border: 4px solid #BDDFF6;
+  position: relative;
+}
+
+.opentok-publisher-controls,
+.opentok-stream-controls{
+  float:none;
+	position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: rgba(255,255,255,0.5);
+  border-bottom-left-radius: 3px;
+  padding: 2px 2px 1px 1px;
+}
+
+.opentok-stream object,
+.opentok-publisher object{
+  display:block;
+}
