@@ -103,11 +103,11 @@
   };
   
   $.openTok.logLevel = {
-    none: TB.NONE,
-    error: TB.ERROR,
-    warn: TB.WARN,
-    info: TB.INFO,
-    debug: TB.DEBUG,
+    none: OT.NONE,
+    error: OT.ERROR,
+    warn: OT.WARN,
+    info: OT.INFO,
+    debug: OT.DEBUG,
   };
 
   $.openTok.prototype = {
@@ -186,8 +186,8 @@
         jq: this.element
       });
 
-      TB.setLogLevel(this.options.logLevel);
-      this.session = TB.initSession(this.options.sessionId);
+      OT.setLogLevel(this.options.logLevel);
+      this.session = OT.initSession(this.options.apiKey, this.options.sessionId);
 
       $.each($.openTok.event, function(eventName,eventType) {
         if(self.options[eventName] !== undefined) {
@@ -439,7 +439,7 @@
     },
     connect: function(e){
       try {
-        this.session.connect(this.options.apiKey, this.options.connectionToken);
+        this.session.connect(this.options.connectionToken);
       }
       catch(err) {
         alert(err);
